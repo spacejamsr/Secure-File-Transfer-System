@@ -71,7 +71,7 @@ pip install -r requirements.txt
 Generate a secret key:
 python -c "import secrets; print(secrets.token_hex(32))"
 
-Edit the .env file and paste the output into APP_SECRET_KEY.
+Rename the env example.txt file to .env and paste the secret key output into APP_SECRET_KEY.
 
 ### Step 2 - Create users
 python create_users.py
