@@ -218,6 +218,7 @@ __marimo__/
 .streamlit/secrets.toml
 
 # Project specific - never push these
+.env
 users.json
 audit_log.json
 staging/
