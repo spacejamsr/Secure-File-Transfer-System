@@ -216,3 +216,9 @@ __marimo__/
 
 # Streamlit
 .streamlit/secrets.toml
+
+# Project specific - never push these
+users.json
+audit_log.json
+staging/
+inbox/
