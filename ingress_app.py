@@ -35,7 +35,7 @@ load_dotenv()
 # Usage: streamlit run ingress_app.py -- --staging-path /path/to/staging
 # =============================================================================
 parser = argparse.ArgumentParser()
-parser.add_argument('--staging-path', type=str, default'staging', help='Path to the staging folder for the data diode transfer')
+parser.add_argument('--staging-path', type=str, default='staging', help='Path to the staging folder for the data diode transfer')
 args = parser.parse_args(sys.argv[1:])
 STAGING_PATH = args.staging_path
 INBOX_PATH = os.getenv("INBOX_PATH", "inbox")
