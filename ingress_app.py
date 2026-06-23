@@ -19,17 +19,25 @@ import re                   # Regular expressions for input sanitization
 from datetime import datetime, timezone  # Timestamp generation
 from audit_log import write_log          # Audit logging module
 from dotenv import load_dotenv           # Environment variable loading
+import argparse             # handling command line arguments
+import sys                  # accessing system information
 
 # Load environment variables from .env file
 # This keeps sensitive configuration out of the code (NFR-MAINT-002)
 load_dotenv()
 
 # =============================================================================
-# CONFIGURATION
-# Path to staging folder where uploaded files are saved before data diode
-# transfer. Can be pointed to a network drive in production. (FR-ING-012)
+# COMMAND LINE ARGUMENT PARSING
+# The staging path is passed as a command line argument to avoid hardcoding.
+# This allows the app to be pointed at any folder including the real data
+# diode staging location without modifying the code.
+#
+# Usage: streamlit run ingress_app.py -- --staging-path /path/to/staging
 # =============================================================================
-STAGING_PATH = os.getenv("STAGING_PATH", "staging")
+parser = argparse.ArgumentParser()
+parser.add_argument('--staging-path', type=str, default'staging', help='Path to the staging folder for the data diode transfer')
+args = parser.parse_args(sys.argv[1:])
+STAGING_PATH = args.staging_path
 INBOX_PATH = os.getenv("INBOX_PATH", "inbox")
 MAX_LOGIN_ATTEMPTS = int(os.getenv("MAX_LOGIN_ATTEMPTS", 5))
 SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
