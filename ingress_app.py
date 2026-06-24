@@ -1,10 +1,10 @@
 # =============================================================================
 # SECURE FILE TRANSFER SYSTEM - INGRESS APP
 # =============================================================================
-# Purpose: Web application running on the connected network (low side).
+# Purpose: Web application running on the connected network.
 #          Allows authenticated users to upload files with metadata.
-#          Files are saved to the staging folder for transfer via data diode
-#          to the disconnected network (high side).
+#          Files are saved to the staging folder for transfer
+#          to the disconnected network.
 #
 # Spec Reference: Section 3.1 - Ingress WebApp (Connected Network)
 # =============================================================================
@@ -29,13 +29,12 @@ load_dotenv()
 # =============================================================================
 # COMMAND LINE ARGUMENT PARSING
 # The staging path is passed as a command line argument to avoid hardcoding.
-# This allows the app to be pointed at any folder including the real data
-# diode staging location without modifying the code.
+# This allows the app to be pointed at any folder without modifying the code.
 #
 # Usage: streamlit run ingress_app.py -- --staging-path /path/to/staging
 # =============================================================================
 parser = argparse.ArgumentParser()
-parser.add_argument('--staging-path', type=str, default='staging', help='Path to the staging folder for the data diode transfer')
+parser.add_argument('--staging-path', type=str, default='staging', help='Path to the staging folder for transfer')
 args, unknown = parser.parse_known_args()
 STAGING_PATH = args.staging_path
 INBOX_PATH = os.getenv("INBOX_PATH", "inbox")
@@ -274,7 +273,7 @@ else:
                 # STEP 3: Create staging folder structure (FR-ING-009)
                 # Structure: /staging/{UUID}/
                 # In production, STAGING_PATH points to a network drive
-                # accessible by the data diode (FR-ING-012)
+                # accessible (FR-ING-012)
                 # -------------------------------------------------------------
                 folder_path = os.path.join(STAGING_PATH, file_id)
                 os.makedirs(folder_path)
@@ -292,7 +291,7 @@ else:
                 # (FR-ING-011, NFR-SEC-005)
                 # The hash is stored in metadata.json and verified by the
                 # Egress app after transfer to detect any file corruption
-                # or tampering during the data diode transfer process
+                # or tampering during the transfer process
                 # -------------------------------------------------------------
                 sha256 = hashlib.sha256()
                 with open(file_path, "rb") as f:
