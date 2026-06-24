@@ -13,7 +13,7 @@ RUN pip install --no-cache-dir -r requirements.txt
 # Copy all application files
 COPY egress_app.py .
 COPY audit_log.py .
-COPY users.json .
+
 
 # Create inbox folder
 RUN mkdir -p inbox
