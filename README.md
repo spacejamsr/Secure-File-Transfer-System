@@ -10,28 +10,27 @@ Status: In Development
 
 ## Overview
 This is a proof-of-concept for a secure one-way file transfer system
-designed to move files from a connected network (low side) to a
-disconnected network (high side) via a one-way data diode.
+designed to move files from a connected network to a
+disconnected network.
 
 The system consists of two independent web applications:
-- **Ingress App** (`ingress_app.py`) - runs on the connected network (low side)
-- **Egress App** (`egress_app.py`) - runs on the disconnected network (high side)
+- **Ingress App** (`ingress_app.py`) - runs on the connected network 
+- **Egress App** (`egress_app.py`) - runs on the disconnected network 
 
 ## How It Works
 1. User logs into the Ingress app and uploads a file
 2. File is saved to the staging folder with a UUID and metadata.json
-3. Staging folder is transferred via data diode to the inbox folder
+3. Staging folder is transferred to the inbox folder
 4. User logs into the Egress app and downloads their file
 5. File integrity is verified via SHA-256 hash before download
 
-Note: In production, step 3 is handled automatically by the physical data
-diode hardware. For the PoC, manually copy files from staging/ to inbox/
+Note: In production, step 3 is handled automatically. For the PoC, manually copy files from staging/ to inbox/
 to simulate this transfer.
 
 ## Project Structure
 Secure-File-Transfer-System/
-- ingress_app.py      - Low side web application
-- egress_app.py       - High side web application
+- ingress_app.py      - Connected network web application
+- egress_app.py       - Disconnected network web application
 - audit_log.py        - Shared audit logging module
 - create_users.py     - Admin script to create/reset users
 - users.json          - Hashed user credentials (auto-generated)
@@ -95,11 +94,11 @@ Access at http://127.0.0.1:8502
 ### Step 5 - Test the workflow
 1. Log into Ingress as User-1
 2. Upload a file addressed to User-2
-3. Copy the UUID folder from staging/ to inbox/ (simulates data diode transfer)
+3. Copy the UUID folder from staging/ to inbox/ (simulates transfer)
 
    Manually copy the UUID folder(s) from the staging/ directory into the inbox/ 
    directory using your file manager or preferred method. This simulates what 
-   the data diode hardware does automatically in production.
+   the hardware does automatically in production.
 4. Log into Egress as User-2
 5. Download the file and verify integrity check passes
 
