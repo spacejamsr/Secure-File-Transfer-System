@@ -36,7 +36,7 @@ load_dotenv()
 # =============================================================================
 parser = argparse.ArgumentParser()
 parser.add_argument('--staging-path', type=str, default='staging', help='Path to the staging folder for the data diode transfer')
-args = parser.parse_args(sys.argv[1:])
+args, unknown = parser.parse_known_args()
 STAGING_PATH = args.staging_path
 INBOX_PATH = os.getenv("INBOX_PATH", "inbox")
 MAX_LOGIN_ATTEMPTS = int(os.getenv("MAX_LOGIN_ATTEMPTS", 5))
