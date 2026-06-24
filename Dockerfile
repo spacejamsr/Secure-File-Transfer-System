@@ -3,6 +3,8 @@ FROM python:3.11-slim
 
 # Set working directory inside the container
 WORKDIR /app
+
+# Environment variables
 ENV INBOX_PATH=inbox
 ENV MAX_LOGIN_ATTEMPTS=5
 ENV SESSION_TIMEOUT=1800
