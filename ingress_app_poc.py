@@ -1,7 +1,7 @@
 # =============================================================================
 # SECURE FILE TRANSFER SYSTEM - INGRESS APP (PoC Version)
 # =============================================================================
-# Purpose: Web application running on the connected network (low side).
+# Purpose: Web application running on the connected network.
 #          For this PoC, transfers a fixed test.txt file to the staging folder.
 #          The staging folder path is passed as a command line argument.
 #
@@ -203,7 +203,7 @@ else:
             # STEP 3: Create staging folder structure (FR-ING-009)
             # Structure: /staging/{UUID}/
             # Staging path is passed as command line argument to avoid
-            # hardcoding — can point to real diode staging location
+            # hardcoding — can point to real staging location
             # -----------------------------------------------------------------
             folder_path = os.path.join(STAGING_PATH, file_id)
             os.makedirs(folder_path)
