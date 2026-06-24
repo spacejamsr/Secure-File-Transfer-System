@@ -1,10 +1,10 @@
 # =============================================================================
 # SECURE FILE TRANSFER SYSTEM - EGRESS APP
 # =============================================================================
-# Purpose: Web application running on the disconnected network (high side).
+# Purpose: Web application running on the disconnected network.
 #          Allows authenticated users to view and download files intended
 #          for them. Files are read from the inbox folder which receives
-#          transfers from the data diode.
+#          transfers.
 #
 # Spec Reference: Section 3.3 - Egress WebApp (Disconnected Network)
 # =============================================================================
@@ -23,8 +23,8 @@ load_dotenv()
 
 # =============================================================================
 # CONFIGURATION
-# INBOX_PATH: folder where files arrive from the data diode (FR-XFER-003)
-# In production this is mounted to the data diode destination
+# INBOX_PATH: folder where files arrive (FR-XFER-003)
+# In production this is mounted to the destination
 # =============================================================================
 STAGING_PATH = os.getenv("STAGING_PATH", "staging")
 INBOX_PATH = os.getenv("INBOX_PATH", "inbox")
@@ -82,7 +82,7 @@ def check_login(username, password):
 # FILE INTEGRITY VERIFICATION
 # Recalculates SHA-256 hash of received file and compares to the hash
 # stored in metadata.json by the Ingress app. (FR-EGR-004, NFR-SEC-005)
-# Any corruption or tampering during data diode transfer will be detected.
+# Any corruption or tampering during transfer will be detected.
 # =============================================================================
 
 def verify_hash(file_path, expected_hash):
@@ -108,7 +108,7 @@ def verify_hash(file_path, expected_hash):
 # =============================================================================
 # INBOX FOLDER SCANNER
 # Scans the inbox folder for files intended for the logged-in user.
-# The inbox folder receives files transferred via the data diode.
+# The inbox folder receives files transferred.
 # (FR-EGR-003, FR-EGR-004)
 # =============================================================================
 
@@ -270,7 +270,7 @@ else:
 
                 # Show integrity verification result (FR-EGR-004, NFR-SEC-005)
                 # This confirms the file was not corrupted or tampered with
-                # during the data diode transfer process
+                # during the transfer process
                 if file['hash_valid']:
                     st.success("✓ File integrity verified - SHA-256 hash matches")
                 else:
