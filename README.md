@@ -20,7 +20,8 @@ The system consists of two independent web applications:
 ## How It Works
 1. User logs into the Ingress app and uploads a file
 2. File is saved to the staging folder with a UUID and metadata.json
-3. Staging folder is transferred to the inbox folder
+3. Staging folder is transferred to the inbox folder. Note: In production, step 3 is handled automatically by
+the physical hardware. This was successfully tested in the PoC.
 4. User logs into the Egress app and downloads their file
 5. File integrity is verified via SHA-256 hash before download
 
@@ -165,7 +166,7 @@ The following features are planned but not yet implemented:
 - 90-day audit log retention policy
 
 ### Infrastructure
-- Docker containerization
+- Docker containerization (Dockerfile created for Egress app - see Dockerfile)
 - PostgreSQL database for metadata storage
 - Nginx reverse proxy
 - Automated backups
